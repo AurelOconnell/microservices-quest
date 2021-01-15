@@ -1,0 +1,11 @@
+POST http://localhost:5000/api/wilders HTTP/1.1
+content-type: application/json
+
+{
+    "name":"toto22334",
+    "city": "Londres",
+    "skills":[
+        {"title":"express", "votes":12},
+        {"title":"mongo", "votes":12}
+    ]
+} 
