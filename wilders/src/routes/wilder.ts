@@ -52,12 +52,6 @@ router
         .isLength({ min: 3 })
         .withMessage('name must be at least 3 characters long'),
       body('city').isString().withMessage('city must be a string'),
-      body('skills.*.title')
-        .isLength({ min: 2 })
-        .withMessage('skill title must be at least 2 characters long'),
-      body('skills.*.votes')
-        .isInt({ min: 0 })
-        .withMessage('skill votes must be an integer greater or equal to 0'),
     ],
     asyncHandler(controller.create)
   )
