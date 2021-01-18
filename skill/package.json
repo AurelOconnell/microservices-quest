@@ -1,0 +1,56 @@
+{
+  "name": "skill-service",
+  "version": "1.0.0",
+  "description": "Service skill",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "npm run dev",
+    "build": "tsc",
+    "lint": "eslint . ",
+    "lint-fix": "eslint --fix . ",
+    "dev": "ts-node-dev --transpile-only --respawn  ./src/index.ts",
+    "prod": "tsc && node ./built/src/index.js",
+    "debug": "tsc && node --inspect ./built/src/index.js",
+    "test": "jest --watchAll --no-cache"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ]
+  },
+  "author": "Thomas Culdaut",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.17.8",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "express-validator": "^6.8.0",
+    "mongoose": "^5.9.28",
+    "save": "^2.4.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.8",
+    "@types/jest": "^26.0.19",
+    "@types/supertest": "^2.0.10",
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-config-prettier": "^6.13.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.6.3",
+    "mongodb-memory-server": "^6.9.2",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.1.2",
+    "supertest": "^6.0.1",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^9.0.0",
+    "ts-node-dev": "^1.0.0",
+    "typescript": "^4.0.3"
+  }
+}
