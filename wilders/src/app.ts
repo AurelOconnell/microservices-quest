@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import wilderRouter from './routes/wilder';
+import createWilder from './routes/createWilder';
 import errorMiddleware from './middlewares/error';
 import NotFoundError from './errors/NotFoundError';
 
@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-app.use(wilderRouter);
+app.use(createWilder);
 
 app.get('*', () => {
   const error = new NotFoundError();
