@@ -10,7 +10,7 @@ describe('Create a wilder', () => {
       .post('/api/wilders')
       .send(wilder)
       .expect(201);
-    expect(response.body.result.name).toEqual(wilder.name);
+    expect(response.body.result).toMatchObject(wilder);
     const wilderInDb = await WilderModel.findOne({ name: wilder.name });
     expect(wilderInDb).toMatchObject(wilder);
   });

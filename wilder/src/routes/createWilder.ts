@@ -1,9 +1,10 @@
 import { Request, Response, Router } from 'express';
+import { ParamsDictionary } from 'express-serve-static-core';
 import { body, validationResult } from 'express-validator';
 import asyncHandler from 'express-async-handler';
 
 import InputError from '../errors/InputError';
-import WilderModel from '../models/Wilder';
+import WilderModel, { IWilder } from '../models/Wilder';
 import BadRequestError from '../errors/BadRequestError';
 
 const router = Router();
@@ -17,7 +18,10 @@ router.route('/api/wilders').post(
     body('city').isString().withMessage('city must be a string'),
   ],
   asyncHandler(
-    async (req: Request, res: Response): Promise<void> => {
+    async (
+      req: Request<ParamsDictionary, Record<string, never>, IWilder>,
+      res: Response
+    ): Promise<void> => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         throw new InputError(errors.array());
