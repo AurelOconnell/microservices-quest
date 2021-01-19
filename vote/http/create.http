@@ -1,0 +1,7 @@
+POST http://localhost:5002/api/votes HTTP/1.1
+content-type: application/json
+
+{
+    "wilderId":"wilder_1",
+    "skillId": "skill_A"
+}

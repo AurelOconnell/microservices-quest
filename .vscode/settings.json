@@ -1,6 +1,7 @@
 {
     "eslint.workingDirectories": [
         "./wilder",
-        "./skill"
+        "./skill",
+        "./vote"
     ]
 }
