@@ -1,16 +1,14 @@
-import { Entity, BaseEntity, Column, OneToMany, PrimaryColumn } from "typeorm";
-import { Vote } from "./Vote";
+import { Entity, BaseEntity, Column, OneToMany, PrimaryColumn } from 'typeorm';
+import type Vote from './Vote';
 
-@Entity()
-export class Skill extends BaseEntity {
-  
+@Entity('Skill')
+export default class Skill extends BaseEntity {
   @PrimaryColumn()
-  id: string;
+  id!: string;
 
   @Column()
-  title: string;
+  title!: string;
 
-  
-  @OneToMany(()=>Vote, (vote:Vote)=>vote.skill)
-  public votes: Vote[]
+  @OneToMany('Vote', (vote: Vote) => vote.skill)
+  public votes!: Vote[];
 }

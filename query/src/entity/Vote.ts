@@ -1,19 +1,21 @@
-import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Skill } from "./Skill";
-import { Wilder } from "./Wilder";
+import { Entity, Column, ManyToOne, PrimaryColumn } from 'typeorm';
+import type Skill from './Skill';
+import type Wilder from './Wilder';
 
-@Entity()
-export class Vote {
+@Entity('Vote')
+export default class Vote {
+  @PrimaryColumn()
+  public wilderId!: string;
 
-  @PrimaryGeneratedColumn()
-  public voteID!: number;
+  @PrimaryColumn()
+  public skillId!: string;
 
-  @ManyToOne(() => Wilder, (wilder:Wilder) => wilder.votes)
+  @ManyToOne('Wilder', (wilder: Wilder) => wilder.votes)
   public wilder!: Wilder;
 
-  @ManyToOne(() => Skill, (skill:Skill) => skill.votes)
+  @ManyToOne('Skill', (skill: Skill) => skill.votes)
   public skill!: Skill;
-  
+
   @Column()
-  count: number;
+  count!: number;
 }

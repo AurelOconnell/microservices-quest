@@ -28,7 +28,8 @@
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "express-validator": "^6.8.0",
-    "mongoose": "^5.9.28"
+    "mongoose": "^5.9.28",
+    "node-nats-streaming": "^0.3.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.8",

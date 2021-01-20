@@ -2,10 +2,13 @@ import { Request, Response, Router } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { body, validationResult } from 'express-validator';
 import asyncHandler from 'express-async-handler';
+import nats from 'node-nats-streaming';
 
 import InputError from '../errors/InputError';
 import WilderModel, { IWilder } from '../models/Wilder';
 import BadRequestError from '../errors/BadRequestError';
+
+const stan = nats.connect('test-cluster', 'wilder');
 
 const router = Router();
 
@@ -38,6 +41,7 @@ router.route('/api/wilders').post(
       }
       const wilder = new WilderModel({ name, city });
       const result = await wilder.save();
+      stan.publish('WILDER_CREATED', JSON.stringify(result));
       res.status(201).json({ success: true, result });
     }
   )

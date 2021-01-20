@@ -2,11 +2,13 @@ import { Request, Response, Router } from 'express';
 import { ParamsDictionary } from 'express-serve-static-core';
 import { body, validationResult } from 'express-validator';
 import asyncHandler from 'express-async-handler';
+import nats from 'node-nats-streaming';
 
 import InputError from '../errors/InputError';
 import SkillModel, { ISkill } from '../models/Skill';
 import BadRequestError from '../errors/BadRequestError';
 
+const stan = nats.connect('test-cluster', 'skill');
 const router = Router();
 
 router.route('/api/skills').post(
@@ -32,6 +34,7 @@ router.route('/api/skills').post(
       }
       const skill = new SkillModel({ title });
       const result = await skill.save();
+      stan.publish('SKILL_CREATED', JSON.stringify(result));
       res.status(201).json({ success: true, result });
     }
   )

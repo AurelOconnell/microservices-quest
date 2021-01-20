@@ -1,18 +1,17 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, OneToMany, PrimaryColumn } from "typeorm";
-import { Vote } from "./Vote";
+import { Entity, BaseEntity, Column, OneToMany, PrimaryColumn } from 'typeorm';
+import type Vote from './Vote';
 
-@Entity()
-export class Wilder extends BaseEntity {
-  
+@Entity('Wilder')
+export default class Wilder extends BaseEntity {
   @PrimaryColumn()
-  id: string;
+  id!: string;
 
   @Column()
-  name: string;
+  name!: string;
 
   @Column()
-  city: string;
+  city!: string;
 
-  @OneToMany(()=>Vote, (vote:Vote)=>vote.wilder)
-  public votes: Vote[]
+  @OneToMany('Vote', (vote: Vote) => vote.wilder)
+  public votes!: Vote[];
 }

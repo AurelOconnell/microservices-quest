@@ -2,5 +2,5 @@ POST http://localhost:5001/api/skills HTTP/1.1
 content-type: application/json
 
 {
-    "title": "Microservices"
+    "title": "Nats"
 } 

@@ -16,7 +16,9 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "setupFilesAfterEnv": ["./src/test/setup.redis-mock.ts"]
+    "setupFilesAfterEnv": [
+      "./src/test/setup.redis-mock.ts"
+    ]
   },
   "author": "Thomas Culdaut",
   "license": "ISC",
@@ -27,6 +29,7 @@
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
     "express-validator": "^6.8.0",
+    "node-nats-streaming": "^0.3.2",
     "redis": "^3.0.2",
     "redis-node": "^0.4.0"
   },

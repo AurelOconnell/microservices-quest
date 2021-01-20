@@ -2,6 +2,7 @@
     "eslint.workingDirectories": [
         "./wilder",
         "./skill",
-        "./vote"
+        "./vote",
+        "./query"
     ]
 }
