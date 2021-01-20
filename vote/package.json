@@ -15,7 +15,8 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["./src/test/setup.redis-mock.ts"]
   },
   "author": "Thomas Culdaut",
   "license": "ISC",
@@ -44,6 +45,7 @@
     "jest": "^26.6.3",
     "nodemon": "^2.0.4",
     "prettier": "^2.1.2",
+    "redis-mock": "^0.56.3",
     "supertest": "^6.0.1",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.0.0",

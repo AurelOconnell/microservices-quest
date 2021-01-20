@@ -17,14 +17,14 @@ router.route('/api/votes').post(
     ): Promise<void> => {
       const { wilderId, skillId } = req.body;
 
-      const incrementedVote = await asyncHincrby(wilderId, skillId, 1);
+      const count = await asyncHincrby(wilderId, skillId, 1);
 
       res.status(201).json({
         success: true,
         result: {
           wilderId,
           skillId,
-          incrementedVote,
+          count,
         },
       });
     }
