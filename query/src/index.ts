@@ -17,6 +17,7 @@ async function start() {
   const voteRepository = connectionORM.getRepository(Vote);
 
   stan.on('connect', () => {
+    // eslint-disable-next-line no-console
     console.log('stan connect');
     const subToWilderCreated = stan.subscribe('WILDER_CREATED');
     subToWilderCreated.on('message', async (msg: Message) => {
