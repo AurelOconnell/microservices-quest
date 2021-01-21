@@ -3,6 +3,7 @@
         "./wilder",
         "./skill",
         "./vote",
-        "./query"
+        "./query",
+        "./client"
     ]
 }

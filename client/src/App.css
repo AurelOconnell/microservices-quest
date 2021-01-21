@@ -1,0 +1,45 @@
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+} 
+
+
+:root {
+  --input-border: #f76c6c;
+  --input-focus-h: 45;
+  --input-focus-s: 100%;
+  --input-focus-l: 42%;
+}
+
+ body {
+  font-family: sans-serif;
+  color: #222;
+  margin: 0;
+}
+
+h1, h2, h3 {
+  margin: 0 0 0.35em;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 15px;
+}
+
+p {
+  margin: 0 0 1.15em;
+}
+
