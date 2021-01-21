@@ -1,8 +1,10 @@
 import { Entity, Column, ManyToOne, PrimaryColumn } from 'typeorm';
-import type Skill from './Skill';
+import { ObjectType, Field, Int } from 'type-graphql';
+import Skill from './Skill';
 import type Wilder from './Wilder';
 
 @Entity('Vote')
+@ObjectType()
 export default class Vote {
   @PrimaryColumn()
   public wilderId!: string;
@@ -13,9 +15,11 @@ export default class Vote {
   @ManyToOne('Wilder', (wilder: Wilder) => wilder.votes)
   public wilder!: Wilder;
 
+  @Field(() => Skill)
   @ManyToOne('Skill', (skill: Skill) => skill.votes)
   public skill!: Skill;
 
+  @Field(() => Int)
   @Column()
   count!: number;
 }

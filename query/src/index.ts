@@ -1,9 +1,12 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
+import { ApolloServer } from 'apollo-server';
 import nats, { Message } from 'node-nats-streaming';
+import { buildSchema } from 'type-graphql';
 import Wilder from './entity/Wilder';
 import Skill from './entity/Skill';
 import Vote from './entity/Vote';
+import WilderResolver from './resolvers/WilderResolver';
 
 const stan = nats.connect('test-cluster', 'query');
 
@@ -14,6 +17,7 @@ async function start() {
   const voteRepository = connectionORM.getRepository(Vote);
 
   stan.on('connect', () => {
+    console.log('stan connect');
     const subToWilderCreated = stan.subscribe('WILDER_CREATED');
     subToWilderCreated.on('message', async (msg: Message) => {
       // eslint-disable-next-line no-console
@@ -36,7 +40,7 @@ async function start() {
       const result = await skillRepository.save(skill);
 
       // eslint-disable-next-line no-console
-      console.log(`Saved a wilder in db: ${JSON.stringify(result)}`);
+      console.log(`Saved a skill in db: ${JSON.stringify(result)}`);
     });
     const subToVoteCreated = stan.subscribe('VOTE_CREATED');
     subToVoteCreated.on('message', async (msg: Message) => {
@@ -48,9 +52,15 @@ async function start() {
       const result = await voteRepository.save(vote);
 
       // eslint-disable-next-line no-console
-      console.log(`Saved a wilder in db: ${JSON.stringify(result)}`);
+      console.log(`Saved a vote in db: ${JSON.stringify(result)}`);
     });
   });
+  const schema = await buildSchema({ resolvers: [WilderResolver] });
+  const server = new ApolloServer({ schema });
+  await server.listen(5003);
+
+  // eslint-disable-next-line no-console
+  console.log('Query service started on http://localhost:5003/graphql !');
 }
 
 start();
