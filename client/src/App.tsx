@@ -43,9 +43,6 @@ function App(): JSX.Element {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   const { loading, error, data } = useQuery(WILDERS);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-  const { wilders } = data;
   return (
     <div>
       <Header>
@@ -69,20 +66,24 @@ function App(): JSX.Element {
           )}
         </AppContext.Provider>
       </Container>
-      <Container>
-        <h2>Wilders</h2>
-        <CardRow>
-          {wilders.map(({ id, name, city, votes }: Wilder) => (
-            <ViewWilder
-              key={id}
-              id={id}
-              city={city}
-              name={name}
-              votes={votes}
-            />
-          ))}
-        </CardRow>
-      </Container>
+      {loading && <p>Loading...</p>}
+      {error && <p>Service broken :(</p>}
+      {!loading && !error && (
+        <Container>
+          <h2>Wilders</h2>
+          <CardRow>
+            {data.wilders.map(({ id, name, city, votes }: Wilder) => (
+              <ViewWilder
+                key={id}
+                id={id}
+                city={city}
+                name={name}
+                votes={votes}
+              />
+            ))}
+          </CardRow>
+        </Container>
+      )}
       <Footer>
         <Container>
           <p>&copy; 2020 Wild Code School</p>
