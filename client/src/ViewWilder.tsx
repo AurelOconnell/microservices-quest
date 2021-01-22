@@ -3,8 +3,9 @@ import blank_profile from "./icons/blank-profile-picture-female.png";
 import Skill from "./Skill";
 import { Card, List } from "./styles/elements";
 import Wilder from "./types/Wilder";
+import Vote from "./Vote";
 
-function ViewWilder({ city, name, votes }: Wilder): JSX.Element {
+function ViewWilder({ city, id, name, votes }: Wilder): JSX.Element {
   return (
     <Card>
       <img src={blank_profile} alt={`${name} Profile`} />
@@ -13,9 +14,10 @@ function ViewWilder({ city, name, votes }: Wilder): JSX.Element {
       <p>{city}</p>
       <h4>Wild Skills</h4>
       <List>
-        {votes.map(({ count, skill: { id, title } }) => (
-          <Skill key={id} skillId={id} title={title} count={count} />
+        {votes.map(({ count, skill: { id: skillId, title } }) => (
+          <Skill key={id} skillId={skillId} title={title} count={count} />
         ))}
+        <Vote wilderId={id} />
       </List>
     </Card>
   );

@@ -7,6 +7,7 @@ import Wilder from './entity/Wilder';
 import Skill from './entity/Skill';
 import Vote from './entity/Vote';
 import WilderResolver from './resolvers/WilderResolver';
+import SkillResolver from './resolvers/SkillResolver';
 
 const stan = nats.connect('test-cluster', 'query');
 
@@ -56,7 +57,9 @@ async function start() {
       console.log(`Saved a vote in db: ${JSON.stringify(result)}`);
     });
   });
-  const schema = await buildSchema({ resolvers: [WilderResolver] });
+  const schema = await buildSchema({
+    resolvers: [WilderResolver, SkillResolver],
+  });
   const server = new ApolloServer({ schema });
   await server.listen(5003);
 
