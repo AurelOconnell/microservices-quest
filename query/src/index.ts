@@ -3,6 +3,7 @@ import { createConnection } from 'typeorm';
 import { ApolloServer } from 'apollo-server';
 import nats, { Message } from 'node-nats-streaming';
 import { buildSchema } from 'type-graphql';
+import { PubSub } from 'graphql-subscriptions';
 import Wilder from './entity/Wilder';
 import Skill from './entity/Skill';
 import Vote from './entity/Vote';
@@ -10,6 +11,7 @@ import WilderResolver from './resolvers/WilderResolver';
 import SkillResolver from './resolvers/SkillResolver';
 
 const stan = nats.connect('test-cluster', 'query');
+const pubSub = new PubSub();
 
 async function start() {
   const connectionORM = await createConnection();
@@ -52,15 +54,17 @@ async function start() {
       const data = msg.getData() as string;
       const vote = voteRepository.create(JSON.parse(data));
       const result = await voteRepository.save(vote);
-
+      await pubSub.publish('TOTO', vote);
       // eslint-disable-next-line no-console
       console.log(`Saved a vote in db: ${JSON.stringify(result)}`);
     });
   });
   const schema = await buildSchema({
     resolvers: [WilderResolver, SkillResolver],
+    pubSub,
   });
   const server = new ApolloServer({ schema });
+  await pubSub.publish('TOTO', {});
   await server.listen(5003);
 
   // eslint-disable-next-line no-console

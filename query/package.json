@@ -21,6 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.19.2",
+    "graphql-subscriptions": "^1.1.0",
     "node-nats-streaming": "^0.3.2",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.13",
