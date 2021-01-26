@@ -20,12 +20,23 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
+  - image: dadtmt/wilder
+    context: wilder
+    docker:
+      dockerfile: Dockerfile
+    sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
 deploy:
   kubectl:
     manifests:
     - infra/deploy/client.yaml
     - infra/deploy/nats.yaml
     - infra/deploy/query-postgres.yaml
+    - infra/deploy/wilder-mongo.yaml
+    - infra/deploy/wilder.yaml
     - infra/deploy/query.yaml
     - infra/mapping/client.yaml
     - infra/mapping/query.yaml
+    - infra/mapping/wilder.yaml

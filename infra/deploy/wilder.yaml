@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wilder
+  namespace: ambassador
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wilder
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: wilder
+    spec:
+      containers:
+      - name: wilder
+        image: dadtmt/wilder
+        ports:
+        - name: http
+          containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wilder
+  namespace: ambassador
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 5000
+  selector:
+    app: wilder

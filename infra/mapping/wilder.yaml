@@ -1,0 +1,8 @@
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: wilder
+  namespace: ambassador
+spec:
+  prefix: /api/wilders
+  service: wilder

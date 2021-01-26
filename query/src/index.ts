@@ -9,12 +9,13 @@ import Vote from './entity/Vote';
 import WilderResolver from './resolvers/WilderResolver';
 import SkillResolver from './resolvers/SkillResolver';
 
+const stan = nats.connect('wilder-vote', 'query', {
+  url: 'http://nats-srv:4222',
+});
+
 async function start() {
   // eslint-disable-next-line no-console
   console.log('service query start');
-  const stan = nats.connect('wilder-vote', 'query', {
-    url: 'https://nats-srv:4222',
-  });
 
   const connectionORM = await createConnection();
   // eslint-disable-next-line no-console

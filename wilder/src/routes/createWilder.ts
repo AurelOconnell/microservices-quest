@@ -8,11 +8,13 @@ import InputError from '../errors/InputError';
 import WilderModel, { IWilder } from '../models/Wilder';
 import BadRequestError from '../errors/BadRequestError';
 
-const stan = nats.connect('test-cluster', 'wilder');
+const stan = nats.connect('wilder-vote', 'wilder', {
+  url: 'http://nats-srv:4222',
+});
 
 const router = Router();
 
-router.route('/api/wilders').post(
+router.route('/').post(
   [
     body('name').notEmpty().withMessage('name must be provided'),
     body('name')
@@ -25,6 +27,7 @@ router.route('/api/wilders').post(
       req: Request<ParamsDictionary, Record<string, never>, IWilder>,
       res: Response
     ): Promise<void> => {
+      console.log("here")
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         throw new InputError(errors.array());

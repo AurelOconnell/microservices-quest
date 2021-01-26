@@ -31,7 +31,7 @@ function useCreateWilder(): CreateWilderReturn {
     try {
       setDelayed(true);
       setLoading(true);
-      const result = await axios.post("http://localhost:5000/api/wilders", {
+      const result = await axios.post("https://localhost/api/wilders", {
         name,
         city,
       });

@@ -5,7 +5,7 @@ import app from './app';
 const start = async () => {
   try {
     // Database
-    await mongoose.connect('mongodb://127.0.0.1:27017/wilderdb', {
+    await mongoose.connect('mongodb://wilder-mongo-srv:27017/wilderdb', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
