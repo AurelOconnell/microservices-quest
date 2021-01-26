@@ -9,10 +9,16 @@ import Vote from './entity/Vote';
 import WilderResolver from './resolvers/WilderResolver';
 import SkillResolver from './resolvers/SkillResolver';
 
-const stan = nats.connect('test-cluster', 'query');
-
 async function start() {
+  // eslint-disable-next-line no-console
+  console.log('service query start');
+  const stan = nats.connect('wilder-vote', 'query', {
+    url: 'https://nats-srv:4222',
+  });
+
   const connectionORM = await createConnection();
+  // eslint-disable-next-line no-console
+  console.log('connected to postgres');
   const wilderRepository = connectionORM.getRepository(Wilder);
   const skillRepository = connectionORM.getRepository(Skill);
   const voteRepository = connectionORM.getRepository(Vote);
@@ -64,7 +70,7 @@ async function start() {
   await server.listen(5003);
 
   // eslint-disable-next-line no-console
-  console.log('Query service started on http://localhost:5003/graphql !');
+  console.log('Query service started on https://localhost/api/query/graphql');
 }
 
 start();

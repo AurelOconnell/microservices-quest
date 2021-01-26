@@ -1,0 +1,31 @@
+apiVersion: skaffold/v2beta11
+kind: Config
+metadata:
+  name: wns-vote-for-skill-microservices
+build:
+  artifacts:
+  - image: dadtmt/client
+    context: client
+    docker:
+      dockerfile: Dockerfile
+    sync:
+        infer:
+        - '**/*.ts'
+        - '**/*.tsx'
+  - image: dadtmt/query
+    context: query
+    docker:
+      dockerfile: Dockerfile
+    sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+deploy:
+  kubectl:
+    manifests:
+    - infra/deploy/client.yaml
+    - infra/deploy/nats.yaml
+    - infra/deploy/query-postgres.yaml
+    - infra/deploy/query.yaml
+    - infra/mapping/client.yaml
+    - infra/mapping/query.yaml

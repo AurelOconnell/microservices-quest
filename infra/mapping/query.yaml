@@ -1,0 +1,8 @@
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: query
+  namespace: ambassador
+spec:
+  prefix: /api/query/
+  service: query
