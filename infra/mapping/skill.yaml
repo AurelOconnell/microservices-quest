@@ -1,0 +1,8 @@
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: skill
+  namespace: ambassador
+spec:
+  prefix: /api/skills
+  service: skill

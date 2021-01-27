@@ -28,6 +28,15 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
+  - image: dadtmt/skill
+    context: skill
+    docker:
+      dockerfile: Dockerfile
+    sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+  
 deploy:
   kubectl:
     manifests:
@@ -35,8 +44,11 @@ deploy:
     - infra/deploy/nats.yaml
     - infra/deploy/query-postgres.yaml
     - infra/deploy/wilder-mongo.yaml
+    - infra/deploy/skill-mongo.yaml
     - infra/deploy/wilder.yaml
     - infra/deploy/query.yaml
+    - infra/deploy/skill.yaml
     - infra/mapping/client.yaml
     - infra/mapping/query.yaml
     - infra/mapping/wilder.yaml
+    - infra/mapping/skill.yaml

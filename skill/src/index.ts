@@ -5,7 +5,7 @@ import app from './app';
 const start = async () => {
   try {
     // Database
-    await mongoose.connect('mongodb://127.0.0.1:27017/skilldb', {
+    await mongoose.connect('mongodb://skill-mongo-srv/skilldb', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
