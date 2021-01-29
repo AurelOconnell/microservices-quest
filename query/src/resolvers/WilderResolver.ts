@@ -15,7 +15,7 @@ export default class WilderResolver {
   @Subscription(() => Vote, {
     topics: 'TOTO',
   })
-  newVote(vote: Vote | undefined): Vote {
+  newVote(@Root() vote: Vote): Vote {
     console.log('pubsub new vote');
     return vote;
   }
