@@ -2,6 +2,6 @@ POST http://localhost:5002/api/votes HTTP/1.1
 content-type: application/json
 
 {
-    "wilderId":"600858ae70820663867b45cd",
-    "skillId": "600858c9910faa1b4fc88019"
+    "wilderId":"6013e8100a898600245aaf57",
+    "skillId": "60141d9bfbb5af26fb68538e"
 }

@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { useQuery, gql } from "@apollo/client";
 import "./App.css";
 import ViewWilder from "./ViewWilder";
@@ -39,10 +39,58 @@ const WILDERS = gql`
   }
 `;
 
+const NEW_VOTE_SUBSCRIPTION = gql`
+  subscription onNewVote {
+    newVote {
+      wilderId
+      skillId
+      count
+    }
+  }
+`;
+
 function App(): JSX.Element {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
-  const { loading, error, data } = useQuery(WILDERS);
+  const { loading, error, data, subscribeToMore } = useQuery(WILDERS);
+
+  useEffect(() => {
+    if (subscribeToMore) {
+      subscribeToMore<{
+        newVote: { wilderId: string; skillId: string; count: number };
+      }>({
+        document: NEW_VOTE_SUBSCRIPTION,
+        updateQuery: (
+          prev,
+          {
+            subscriptionData: {
+              data: {
+                newVote: { wilderId, skillId, count },
+              },
+            },
+          }
+        ) => {
+          const { wilders } = prev;
+          return {
+            ...prev,
+            wilders: wilders.map((wilder: Wilder) =>
+              wilder.id === wilderId
+                ? wilder.votes.map((vote) =>
+                    vote.skill.id === skillId
+                      ? {
+                          ...vote,
+                          count,
+                        }
+                      : vote
+                  )
+                : wilder
+            ),
+          };
+        },
+      });
+    }
+  }, [subscribeToMore]);
+
   return (
     <div>
       <Header>
@@ -72,7 +120,7 @@ function App(): JSX.Element {
         <Container>
           <h2>Wilders</h2>
           <CardRow>
-            {data.wilders.map(({ id, name, city, votes }: Wilder) => (
+            {data?.wilders.map(({ id, name, city, votes }: Wilder) => (
               <ViewWilder
                 key={id}
                 id={id}
