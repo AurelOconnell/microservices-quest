@@ -6,9 +6,11 @@ import type Wilder from './Wilder';
 @Entity('Vote')
 @ObjectType()
 export default class Vote {
+  @Field(() => String)
   @PrimaryColumn()
   public wilderId!: string;
 
+  @Field(() => String)
   @PrimaryColumn()
   public skillId!: string;
 
