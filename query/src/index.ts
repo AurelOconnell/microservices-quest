@@ -13,6 +13,7 @@ import SkillResolver from './resolvers/SkillResolver';
 const stan = nats.connect('test-cluster', 'query');
 
 async function start() {
+  // pubsub subscription graphql
   const pubSub = new RedisPubSub();
   const connectionORM = await createConnection();
   const wilderRepository = connectionORM.getRepository(Wilder);
@@ -54,7 +55,9 @@ async function start() {
       const data = msg.getData() as string;
       const vote = voteRepository.create(JSON.parse(data));
       const result = await voteRepository.save(vote);
-      await pubSub.publish('TOTO', vote);
+
+      // pubsub subscription graphql
+      await pubSub.publish('NEW_VOTE', vote);
       // eslint-disable-next-line no-console
       console.log(`Saved a vote in db: ${JSON.stringify(result)}`);
     });
