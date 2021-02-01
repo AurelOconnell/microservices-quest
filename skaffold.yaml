@@ -55,6 +55,7 @@ deploy:
     - infra/deploy/skill-mongo.yaml
     - infra/deploy/skill-mongo.yaml
     - infra/deploy/vote-redis.yaml
+    - infra/deploy/query-redis.yaml
     - infra/deploy/wilder.yaml
     - infra/deploy/query.yaml
     - infra/deploy/skill.yaml

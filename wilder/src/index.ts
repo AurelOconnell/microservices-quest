@@ -15,7 +15,10 @@ const start = async () => {
     console.log('Connected to database');
 
     // eslint-disable-next-line no-console
-    app.listen(5000, () => console.log('Server started on 5000'));
+    app.listen(5000, () =>
+      // eslint-disable-next-line no-console
+      console.log('Service wilder started on https://localhost/api/wilders')
+    );
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err);

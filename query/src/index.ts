@@ -14,8 +14,16 @@ const stan = nats.connect('wilder-vote', 'query', {
   url: 'http://nats-srv:4222',
 });
 
+// a redis connection to serve as a pubsub system for graphql subscription
+const redisOptions = {
+  host: 'query-redis-srv',
+  port: 6379,
+};
+
 async function start() {
-  const pubSub = new RedisPubSub();
+  const pubSub = new RedisPubSub({
+    connection: redisOptions,
+  });
   const connectionORM = await createConnection();
   // eslint-disable-next-line no-console
   console.log('connected to postgres');

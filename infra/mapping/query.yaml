@@ -6,3 +6,5 @@ metadata:
 spec:
   prefix: /api/query/
   service: query
+  allow_upgrade:
+  - websocket
