@@ -10,10 +10,6 @@ import Vote from './entity/Vote';
 import WilderResolver from './resolvers/WilderResolver';
 import SkillResolver from './resolvers/SkillResolver';
 
-const stan = nats.connect('wilder-vote', 'query', {
-  url: 'http://nats-srv:4222',
-});
-
 // a redis connection to serve as a pubsub system for graphql subscription
 const redisOptions = {
   host: 'query-redis-srv',
@@ -30,7 +26,9 @@ async function start() {
   const wilderRepository = connectionORM.getRepository(Wilder);
   const skillRepository = connectionORM.getRepository(Skill);
   const voteRepository = connectionORM.getRepository(Vote);
-
+  const stan = nats.connect('wilder-vote', 'query', {
+    url: 'http://nats-srv:4222',
+  });
   stan.on('connect', async () => {
     // eslint-disable-next-line no-console
     console.log('stan connect');
