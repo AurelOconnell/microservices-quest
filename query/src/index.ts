@@ -10,8 +10,6 @@ import Vote from './entity/Vote';
 import WilderResolver from './resolvers/WilderResolver';
 import SkillResolver from './resolvers/SkillResolver';
 
-const stan = nats.connect('test-cluster', 'query');
-
 async function start() {
   // pubsub subscription graphql
   const pubSub = new RedisPubSub();
@@ -19,7 +17,7 @@ async function start() {
   const wilderRepository = connectionORM.getRepository(Wilder);
   const skillRepository = connectionORM.getRepository(Skill);
   const voteRepository = connectionORM.getRepository(Vote);
-
+  const stan = nats.connect('test-cluster', 'query');
   stan.on('connect', async () => {
     // eslint-disable-next-line no-console
     console.log('stan connect');
@@ -47,6 +45,7 @@ async function start() {
       // eslint-disable-next-line no-console
       console.log(`Saved a skill in db: ${JSON.stringify(result)}`);
     });
+
     const subToVoteCreated = stan.subscribe('VOTE_CREATED');
     subToVoteCreated.on('message', async (msg: Message) => {
       // eslint-disable-next-line no-console
