@@ -5,8 +5,8 @@ FROM node:14.15.0-alpine3.10
 WORKDIR /app
 
 # install app dependencies
-COPY package.json ./
-RUN npm install
+COPY package*.json ./
+RUN npm ci
 
 # add app
 COPY . ./

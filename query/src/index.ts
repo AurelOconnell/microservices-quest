@@ -27,7 +27,7 @@ async function start() {
   const skillRepository = connectionORM.getRepository(Skill);
   const voteRepository = connectionORM.getRepository(Vote);
   const stan = nats.connect('wilder-vote', 'query', {
-    url: 'http://nats-srv:4222',
+    url: 'nats://nats-srv:4222',
   });
   stan.on('connect', async () => {
     // eslint-disable-next-line no-console

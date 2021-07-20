@@ -1,0 +1,62 @@
+services:
+    client:
+        build: ./client
+        ports: 
+            - 3000:3000
+        volumes: 
+            - ./client/src/:/app/src/
+    query:
+        build: ./query
+        ports: 
+            - 5003:5003
+        volumes: 
+            - ./query/src/:/app/src/
+        depends_on:
+            - nats-srv
+            - query-postgres-srv
+            - query-redis-srv
+    skill:
+        build: ./skill
+        ports: 
+            - 5001:5001
+        volumes: 
+            - ./skill/src/:/app/src/
+        depends_on:
+            - nats-srv
+            - skill-mongo-srv
+    vote:
+        build: ./vote
+        ports: 
+            - 5002:5002
+        volumes: 
+            - ./vote/src/:/app/src/
+        depends_on:
+            - nats-srv
+            - vote-redis-srv
+    wilder:
+        build: ./wilder
+        ports: 
+            - 5000:5000
+        volumes: 
+            - ./wilder/src/:/app/src/
+        depends_on:
+            - nats-srv
+            - wilder-mongo-srv
+    nats-srv:
+        image: nats-streaming
+        expose:
+            - 4222
+        ports:
+            - 8222:8222
+    query-postgres-srv:
+        image: postgres
+        environment:
+            - POSTGRES_PASSWORD=mysecretpassword
+    query-redis-srv:
+        image: redis
+    skill-mongo-srv:
+        image: mongo
+    vote-redis-srv:
+        image: redis
+    wilder-mongo-srv:
+        image: mongo

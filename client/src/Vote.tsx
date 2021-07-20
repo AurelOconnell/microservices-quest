@@ -46,7 +46,7 @@ function Vote({ wilderId }: VoteProps): JSX.Element {
         showLoading={loading}
         disabled={loading || selectedSkillId === "no-selection"}
         onClick={() =>
-          axios.post("https://localhost/api/votes", {
+          axios.post("http://localhost:5002/api/votes", {
             skillId: selectedSkillId,
             wilderId,
           })

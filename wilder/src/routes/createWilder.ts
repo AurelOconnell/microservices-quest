@@ -8,10 +8,6 @@ import InputError from '../errors/InputError';
 import WilderModel, { IWilder } from '../models/Wilder';
 import BadRequestError from '../errors/BadRequestError';
 
-const stan = nats.connect('wilder-vote', 'wilder', {
-  url: 'http://nats-srv:4222',
-});
-
 const router = Router();
 
 router.route('/').post(
@@ -44,6 +40,11 @@ router.route('/').post(
       }
       const wilder = new WilderModel({ name, city });
       const result = await wilder.save();
+
+      const stan = nats.connect('wilder-vote', 'wilder', {
+        url: 'http://nats-srv:4222',
+      });
+
       stan.publish('WILDER_CREATED', JSON.stringify(result));
       res.status(201).json({ success: true, result });
     }

@@ -13,11 +13,11 @@ import { getMainDefinition } from "@apollo/client/utilities";
 import App from "./App";
 
 const httpLink = new HttpLink({
-  uri: "https://localhost/api/query/graphql",
+  uri: "http://localhost:5003/api/query/graphql",
 });
 
 const wsLink = new WebSocketLink({
-  uri: `wss://localhost/api/query/graphql`,
+  uri: `ws://localhost:5003/api/query/graphql`,
   options: {
     reconnect: true,
   },
