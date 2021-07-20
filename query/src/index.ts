@@ -58,9 +58,6 @@ async function start() {
     });
     const subToVoteCreated = stan.subscribe('VOTE_CREATED');
     subToVoteCreated.on('message', async (msg: Message) => {
-      // eslint-disable-next-line no-console
-      console.log(`Received VOTE_CREATED message ${msg.getData()}`);
-
       const data = msg.getData() as string;
       const vote = voteRepository.create(JSON.parse(data));
       const result = await voteRepository.save(vote);
