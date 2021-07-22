@@ -15,14 +15,14 @@ type CreateWilderReturn = {
   formSubmission: (e: FormEvent) => Promise<void>;
   loading: boolean;
   delayed: boolean;
-  error: string;
+  errors: string[];
 };
 
 function useCreateWilder(): CreateWilderReturn {
   const dispatch = useContext(AppContext);
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [delayed, setDelayed] = useDelay(500);
 
@@ -37,7 +37,7 @@ function useCreateWilder(): CreateWilderReturn {
       });
       setLoading(false);
       if (result.data.success) {
-        setError("");
+        setErrors([]);
         if (dispatch) {
           dispatch({
             type: "WILDER_ADDED",
@@ -48,9 +48,9 @@ function useCreateWilder(): CreateWilderReturn {
     } catch (err) {
       setLoading(false);
       if (err.response) {
-        setError(err.response.data.message);
+        setErrors(err.response.data.errors);
       } else {
-        setError(err.message);
+        setErrors([err.message]);
       }
     }
   };
@@ -67,7 +67,7 @@ function useCreateWilder(): CreateWilderReturn {
     formSubmission,
     loading,
     delayed,
-    error,
+    errors,
   };
 }
 
