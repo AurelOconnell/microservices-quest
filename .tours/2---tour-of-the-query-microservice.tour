@@ -1,0 +1,45 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "2 - Tour of the Query microservice",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "The Query microservice is responsible to serve the data to the client through a graphQL endpoint.\n\nThis code tour will focus on how the service listens to the `WILDER_CREATED` event"
+    },
+    {
+      "file": "docker-compose.yml",
+      "description": "The service query runs on port 5003",
+      "line": 11
+    },
+    {
+      "file": "docker-compose.yml",
+      "description": "It depends on nats-srv (the nats streaming server), a postgres container and a redis container.",
+      "line": 17
+    },
+    {
+      "file": "query/src/index.ts",
+      "description": "The query service connects to the same nats streaming server as the wilder service with the same cluster id `wilder-vote`. The client id is different though, here it is `query`.\n",
+      "line": 31
+    },
+    {
+      "file": "query/src/index.ts",
+      "description": "At the connection to the nats streaming server.",
+      "line": 32
+    },
+    {
+      "file": "query/src/index.ts",
+      "description": "We create a subscription to the `WILDER_CREATED` event.\n\nThen we describe what to do when we receive an event.\n\nnats refers to WILDER_CREATED as the channel and treats event a a message.",
+      "line": 36
+    },
+    {
+      "file": "query/src/index.ts",
+      "description": "The message data is the JSON string containing the new wilder data.\n\nWe records the data with a wilderRepository create method (TypeORM) to write into the postgres database.\n\nNow the query microservice owns a copy of the new wilder in its database.\n\nThe wilder is both stored in the wilder service and the query service.",
+      "line": 41
+    },
+    {
+      "file": "query/src/index.ts",
+      "description": "Reach the graphQL server at `http://localhost:5003/graphql` and try the following query:\n\n```graphql\n{\n  wilders {\n    id\n    name\n    city\n  }\n}\n```",
+      "line": 73
+    }
+  ]
+}
