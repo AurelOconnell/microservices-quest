@@ -73,7 +73,7 @@ async function start() {
     await server.listen(5003);
 
     // eslint-disable-next-line no-console
-    console.log('Query service started on https://localhost/api/query/graphql');
+    console.log('Query service started on http://localhost:5003/graphql');
   });
 }
 

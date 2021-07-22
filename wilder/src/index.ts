@@ -17,7 +17,7 @@ const start = async () => {
     // eslint-disable-next-line no-console
     app.listen(5000, () =>
       // eslint-disable-next-line no-console
-      console.log('Service wilder started on https://localhost/api/wilders')
+      console.log('Service wilder started on http://localhost:5000')
     );
   } catch (err) {
     // eslint-disable-next-line no-console

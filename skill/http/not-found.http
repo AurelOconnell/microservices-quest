@@ -1,1 +1,1 @@
-GET http://localhost:5001/api/skills/something HTTP/1.1
+GET http://localhost:5001/something HTTP/1.1
