@@ -61,5 +61,5 @@ services:
     image: mongo
   vote-redis-srv:
     image: redis
-  docker-compose up --build:
+  wilder-mongo-srv:
     image: mongo
