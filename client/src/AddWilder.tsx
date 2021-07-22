@@ -31,7 +31,8 @@ function AddWilder(): JSX.Element {
         value={inputCity.value}
         onChange={inputCity.onChange}
       />
-      {errors.length > 0 && errors.map((error) => <Error key={error}>{error}</Error>)}
+      {errors.length > 0 &&
+        errors.map((error) => <Error key={error}>{error}</Error>)}
       <Button disabled={loading} showLoading={loading && !delayed}>
         {loading && !delayed ? <LoadingIcon /> : "Add"}
       </Button>
