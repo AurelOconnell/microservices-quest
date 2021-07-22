@@ -10,6 +10,10 @@ import BadRequestError from '../errors/BadRequestError';
 
 const router = Router();
 
+const stan = nats.connect('wilder-vote', 'wilder', {
+  url: 'nats://nats-srv:4222',
+});
+
 router.route('/').post(
   [
     body('name').notEmpty().withMessage('name must be provided'),
@@ -39,11 +43,6 @@ router.route('/').post(
       }
       const wilder = new WilderModel({ name, city });
       const result = await wilder.save();
-
-      const stan = nats.connect('wilder-vote', 'wilder', {
-        url: 'nats://nats-srv:4222',
-      });
-
       stan.publish('WILDER_CREATED', JSON.stringify(result));
       res.status(201).json({ success: true, result });
     }
