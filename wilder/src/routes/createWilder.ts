@@ -23,7 +23,6 @@ router.route('/').post(
       req: Request<ParamsDictionary, Record<string, never>, IWilder>,
       res: Response
     ): Promise<void> => {
-      console.log("here")
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         throw new InputError(errors.array());
@@ -42,7 +41,7 @@ router.route('/').post(
       const result = await wilder.save();
 
       const stan = nats.connect('wilder-vote', 'wilder', {
-        url: 'http://nats-srv:4222',
+        url: 'nats://nats-srv:4222',
       });
 
       stan.publish('WILDER_CREATED', JSON.stringify(result));
