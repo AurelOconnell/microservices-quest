@@ -1,8 +1,0 @@
-apiVersion: getambassador.io/v2
-kind: Mapping
-metadata:
-  name: vote
-  namespace: ambassador
-spec:
-  prefix: /api/votes
-  service: vote
