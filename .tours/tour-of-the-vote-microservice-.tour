@@ -1,0 +1,45 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "4 - Tour of the Vote microservice ",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "The Vote service is responsible for incrementing the couple (wilderId, skillId)."
+    },
+    {
+      "file": "docker-compose.yml",
+      "description": "The service runs on the 5002 port.\n\nIt depends on the nats streaming server and on a redis container.",
+      "line": 35
+    },
+    {
+      "file": "vote/src/routes/createVote.ts",
+      "description": "The service vote is connected to the same nats streaming server as the other services.",
+      "line": 9
+    },
+    {
+      "file": "vote/src/routes/createVote.ts",
+      "description": "The body of the POST request is the wilder's id and the skill'id.\n\nThat's represent who recived the vote and for wich skill.",
+      "line": 22
+    },
+    {
+      "file": "vote/src/routes/createVote.ts",
+      "description": "It increments by one in the redis database.",
+      "line": 24
+    },
+    {
+      "file": "vote/src/routes/createVote.ts",
+      "description": "It pusblishes a `VOTE_CREATED` event with a JSON string containing wilderId, skillId and the count.",
+      "line": 30
+    },
+    {
+      "file": "query/src/index.ts",
+      "description": "The query service is listening for the `VOTE_CREATED` event and will save it in the database.",
+      "line": 63
+    },
+    {
+      "file": "query/src/index.ts",
+      "description": "This is for the `graphQL subscription` mechanism that will update the query on the client application with a websocket.",
+      "line": 64
+    }
+  ]
+}

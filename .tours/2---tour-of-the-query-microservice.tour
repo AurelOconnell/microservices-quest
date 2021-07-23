@@ -38,7 +38,7 @@
     },
     {
       "file": "query/src/index.ts",
-      "description": "Reach the graphQL server at `http://localhost:5003/graphql` and try the following query:\n\n```graphql\n{\n  wilders {\n    id\n    name\n    city\n  }\n}\n```",
+      "description": "Reach the graphQL server at `http://localhost:5003/graphql` and try the following query:\n\n```graphql\n{\n  wilders {\n    id\n    name\n    city\n  }\n}\n```\n\nWhen reloading the application you must see the new wilder appears.",
       "line": 73
     }
   ]
