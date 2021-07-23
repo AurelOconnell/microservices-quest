@@ -18,7 +18,7 @@
     },
     {
       "file": "query/src/index.ts",
-      "description": "The query service connects to the same nats streaming server as the wilder service with the same cluster id `wilder-vote`. The client id is different though, here it is `query`.\n",
+      "description": "The query service connects to the same nats streaming server as the wilder service with the same cluster id `wilder-vote`. \n\nThe client id is different though, here it is `query`.\n",
       "line": 31
     },
     {
@@ -28,12 +28,12 @@
     },
     {
       "file": "query/src/index.ts",
-      "description": "We create a subscription to the `WILDER_CREATED` event.\n\nThen we describe what to do when we receive an event.\n\nnats refers to WILDER_CREATED as the channel and treats event a a message.",
+      "description": "We create a subscription to the `WILDER_CREATED` event.\n\nThen we describe what to do when we receive an event.\n\nnats refers to WILDER_CREATED as a channel and treats event as a message.",
       "line": 36
     },
     {
       "file": "query/src/index.ts",
-      "description": "The message data is the JSON string containing the new wilder data.\n\nWe records the data with a wilderRepository create method (TypeORM) to write into the postgres database.\n\nNow the query microservice owns a copy of the new wilder in its database.\n\nThe wilder is both stored in the wilder service and the query service.",
+      "description": "The message data is the JSON string containing the new wilder data.\n\nWe records the data with a wilderRepository create method (TypeORM) to write into the postgres database.\n\n**Now the query microservice owns a copy of the new wilder in its database.**\n\nThe wilder is both stored in the wilder service and the query service.",
       "line": 41
     },
     {

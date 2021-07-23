@@ -18,7 +18,7 @@
     },
     {
       "file": "vote/src/routes/createVote.ts",
-      "description": "The body of the POST request is the wilder's id and the skill'id.\n\nThat's represent who recived the vote and for wich skill.",
+      "description": "The body of the POST request is the wilder id and the skill id.\n\nThat's represent who received the vote and for wich skill.",
       "line": 22
     },
     {
@@ -38,8 +38,13 @@
     },
     {
       "file": "query/src/index.ts",
-      "description": "This is for the `graphQL subscription` mechanism that will update the query on the client application with a websocket.",
-      "line": 64
+      "description": "This is for the `graphQL subscription` mechanism that will update the query on the client application with a websocket.\n\n**This is not related to the microservice architecture but it is another use of an event pattern**",
+      "line": 67
+    },
+    {
+      "file": "readme.md",
+      "description": "These tours are over, now feel free to explore the repository and to add some features if you want to.",
+      "line": 1
     }
   ]
 }

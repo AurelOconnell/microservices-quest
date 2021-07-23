@@ -4,7 +4,7 @@
   "steps": [
     {
       "title": "Introduction",
-      "description": ""
+      "description": "The Wilder microservice is responsible for the creation of a wilder.\n\nFollow the step to understand how this is working."
     },
     {
       "file": "docker-compose.yml",
@@ -23,22 +23,22 @@
     },
     {
       "file": "docker-compose.yml",
-      "description": "client is the frontend react application that will be accessible on http://localhost:3000/\nOpen it in your browser and open the network inspector.\nCreate a wilder.\nNote the url called by the client.",
+      "description": "client is the frontend react application that will be accessible on http://localhost:3000/\n\nOpen it in your browser and open the network inspector.\n\nCreate a wilder(plus button).\n\nNote the url called by the client.",
       "line": 2
     },
     {
       "file": "docker-compose.yml",
-      "description": "The URL to create a wilder is http://localhost:5000\nSo according to the ports specified by this file the service is `wilder`\nLet's explore this service.",
+      "description": "The URL to create a wilder is http://localhost:5000\n\nSo according to the ports specified by this file the service is `wilder`\n\nLet's explore this service.",
       "line": 39
     },
     {
       "file": "wilder/src/index.ts",
-      "description": "This the index file for the service `wilder`\nThe start function will start the server",
+      "description": "This the index file for the service `wilder`\n\nThe start function will start the server.",
       "line": 5
     },
     {
       "file": "wilder/src/index.ts",
-      "description": "The service is connected to its own database. The url is composed with the service name `wilder-mongo-srv` specified in `docker-compose.yml`\n",
+      "description": "The service is connected to its own database. \n\nThe url is composed with the service name `wilder-mongo-srv` specified in `docker-compose.yml`\n",
       "line": 8,
       "selection": {
         "start": {
@@ -53,7 +53,7 @@
     },
     {
       "file": "wilder/src/index.ts",
-      "description": "The application is served on the port 5000.\nLet's see the app code in next step.",
+      "description": "The application is served on the port 5000.\n\nLet's see the app code in next step.",
       "line": 18
     },
     {
@@ -78,7 +78,7 @@
     },
     {
       "file": "wilder/src/routes/createWilder.ts",
-      "description": "`body` is a middleware from the `express-validator` package.\nIt is used to specify the validation rules to apply to the request body and the related error messages.\n",
+      "description": "`body` is a middleware from the `express-validator` package.\n\nIt is used to specify the validation rules to apply to the request body and the related error messages.\n",
       "line": 24,
       "selection": {
         "start": {
@@ -98,7 +98,7 @@
     },
     {
       "file": "wilder/src/routes/createWilder.ts",
-      "description": "If the validation rules specified by `body` are not fullfilled we are getting the errors in a Result<ValidationError>. ",
+      "description": "If the validation rules specified by `body` are not fullfilled we are getting the errors in a `Result<ValidationError>` object. ",
       "line": 30
     },
     {
@@ -108,7 +108,7 @@
     },
     {
       "file": "wilder/src/routes/createWilder.ts",
-      "description": "Will throw an error if there is already a wilder with the same name in the database.",
+      "description": "This will throw an error if there is already a wilder with the same name in the database.",
       "line": 40
     },
     {
