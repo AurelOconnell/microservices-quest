@@ -14,7 +14,7 @@ function ViewWilder({ city, id, name, votes }: Wilder): JSX.Element {
       <p>{city}</p>
       <h4>Wild Skills</h4>
       <List>
-        {votes.map(({ count, skill: { id: skillId, title } }) => (
+        {votes?.map(({ count, skill: { id: skillId, title } }) => (
           <Skill key={id} skillId={skillId} title={title} count={count} />
         ))}
         <Vote wilderId={id} />

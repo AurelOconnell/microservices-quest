@@ -4,10 +4,12 @@ import asyncHandler from 'express-async-handler';
 import nats from 'node-nats-streaming';
 import { asyncHincrby } from '../redisClient';
 
-const stan = nats.connect('test-cluster', 'vote');
+const stan = nats.connect('wilder-vote', 'vote', {
+  url: 'http://nats-srv:4222',
+});
 const router = Router();
 
-router.route('/api/votes').post(
+router.route('/').post(
   asyncHandler(
     async (
       req: Request<

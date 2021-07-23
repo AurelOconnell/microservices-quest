@@ -10,14 +10,25 @@ import Vote from './entity/Vote';
 import WilderResolver from './resolvers/WilderResolver';
 import SkillResolver from './resolvers/SkillResolver';
 
+// a redis connection to serve as a pubsub system for graphql subscription
+const redisOptions = {
+  host: 'query-redis-srv',
+  port: 6379,
+};
+
 async function start() {
-  // pubsub subscription graphql
-  const pubSub = new RedisPubSub();
+  const pubSub = new RedisPubSub({
+    connection: redisOptions,
+  });
   const connectionORM = await createConnection();
+  // eslint-disable-next-line no-console
+  console.log('connected to postgres');
   const wilderRepository = connectionORM.getRepository(Wilder);
   const skillRepository = connectionORM.getRepository(Skill);
   const voteRepository = connectionORM.getRepository(Vote);
-  const stan = nats.connect('test-cluster', 'query');
+  const stan = nats.connect('wilder-vote', 'query', {
+    url: 'nats://nats-srv:4222',
+  });
   stan.on('connect', async () => {
     // eslint-disable-next-line no-console
     console.log('stan connect');
@@ -48,9 +59,6 @@ async function start() {
 
     const subToVoteCreated = stan.subscribe('VOTE_CREATED');
     subToVoteCreated.on('message', async (msg: Message) => {
-      // eslint-disable-next-line no-console
-      console.log(`Received VOTE_CREATED message ${msg.getData()}`);
-
       const data = msg.getData() as string;
       const vote = voteRepository.create(JSON.parse(data));
       const result = await voteRepository.save(vote);
@@ -65,11 +73,10 @@ async function start() {
       pubSub,
     });
     const server = new ApolloServer({ schema });
-    await pubSub.publish('TOTO', { wilderId: 'toto', skillId: 'tata' });
     await server.listen(5003);
 
     // eslint-disable-next-line no-console
-    console.log('Query service started on http://localhost:5003/graphql !');
+    console.log('Query service started on http://localhost:5003/graphql');
   });
 }
 

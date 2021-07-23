@@ -8,10 +8,12 @@ import InputError from '../errors/InputError';
 import SkillModel, { ISkill } from '../models/Skill';
 import BadRequestError from '../errors/BadRequestError';
 
-const stan = nats.connect('test-cluster', 'skill');
+const stan = nats.connect('wilder-vote', 'skill', {
+  url: 'http://nats-srv:4222',
+});
 const router = Router();
 
-router.route('/api/skills').post(
+router.route('/').post(
   [body('title').notEmpty().withMessage('title must be provided')],
   asyncHandler(
     async (

@@ -1,0 +1,130 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "1 - Tour of the Wilder microservice",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": ""
+    },
+    {
+      "file": "docker-compose.yml",
+      "description": "To start the application, run the command\n```bash\ndocker-compose up --build\n```",
+      "line": 1,
+      "selection": {
+        "start": {
+          "line": 64,
+          "character": 5
+        },
+        "end": {
+          "line": 64,
+          "character": 21
+        }
+      }
+    },
+    {
+      "file": "docker-compose.yml",
+      "description": "client is the frontend react application that will be accessible on http://localhost:3000/\nOpen it in your browser and open the network inspector.\nCreate a wilder.\nNote the url called by the client.",
+      "line": 2
+    },
+    {
+      "file": "docker-compose.yml",
+      "description": "The URL to create a wilder is http://localhost:5000\nSo according to the ports specified by this file the service is `wilder`\nLet's explore this service.",
+      "line": 39
+    },
+    {
+      "file": "wilder/src/index.ts",
+      "description": "This the index file for the service `wilder`\nThe start function will start the server",
+      "line": 5
+    },
+    {
+      "file": "wilder/src/index.ts",
+      "description": "The service is connected to its own database. The url is composed with the service name `wilder-mongo-srv` specified in `docker-compose.yml`\n",
+      "line": 8,
+      "selection": {
+        "start": {
+          "line": 8,
+          "character": 39
+        },
+        "end": {
+          "line": 8,
+          "character": 55
+        }
+      }
+    },
+    {
+      "file": "wilder/src/index.ts",
+      "description": "The application is served on the port 5000.\nLet's see the app code in next step.",
+      "line": 18
+    },
+    {
+      "file": "wilder/src/app.ts",
+      "description": "This is a simple express application.",
+      "line": 7
+    },
+    {
+      "file": "wilder/src/app.ts",
+      "description": "All the routes which are not handled by createWilder router will result in a 404 error.",
+      "line": 16
+    },
+    {
+      "file": "wilder/src/routes/createWilder.ts",
+      "description": "stan is the client connected to the `nats-streaming server`\n\nIt will be used to pusblish events to pass data to other microservices.\n\n`wilder-vote` is the cluster id that will be used by every services.\n\n`wilder` is the client id and must be unique for each service.\n\n`nats://nats-srv:4222` is the url of the server, `nats-srv` being the service key specified in `docker-compose.yml`\n",
+      "line": 13
+    },
+    {
+      "file": "wilder/src/routes/createWilder.ts",
+      "description": "The HTTP method to create a wilder is POST",
+      "line": 17
+    },
+    {
+      "file": "wilder/src/routes/createWilder.ts",
+      "description": "`body` is a middleware from the `express-validator` package.\nIt is used to specify the validation rules to apply to the request body and the related error messages.\n",
+      "line": 24,
+      "selection": {
+        "start": {
+          "line": 3,
+          "character": 41
+        },
+        "end": {
+          "line": 3,
+          "character": 58
+        }
+      }
+    },
+    {
+      "file": "wilder/src/routes/createWilder.ts",
+      "description": "This make us able to tell Typescript about the type we are expecting for the request body: `IWilder`\n\nmouseover req.body line 34 to see the type infered by typescript.",
+      "line": 27
+    },
+    {
+      "file": "wilder/src/routes/createWilder.ts",
+      "description": "If the validation rules specified by `body` are not fullfilled we are getting the errors in a Result<ValidationError>. ",
+      "line": 30
+    },
+    {
+      "file": "wilder/src/routes/createWilder.ts",
+      "description": "If there are some validation errors an error is thrown that will result with a response http status `400 bad request` and an array of error messages.\n",
+      "line": 32
+    },
+    {
+      "file": "wilder/src/routes/createWilder.ts",
+      "description": "Will throw an error if there is already a wilder with the same name in the database.",
+      "line": 40
+    },
+    {
+      "file": "wilder/src/routes/createWilder.ts",
+      "description": "Saving the new wilder to the database.",
+      "line": 45
+    },
+    {
+      "file": "wilder/src/routes/createWilder.ts",
+      "description": "The stan client notifies the nats streaming server that :\n- a `WILDER_CREATED` event occurs\n- the new wilder has the `result` (type WilderDoc) informations as a JSON string",
+      "line": 46
+    },
+    {
+      "file": "wilder/src/routes/createWilder.ts",
+      "description": "Respond a 201 http status with the result\n\nNow check the Tour of the Query service to understand how it acts when a `WILDER_CREATED` is received.",
+      "line": 47
+    }
+  ]
+}

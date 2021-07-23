@@ -1,7 +1,7 @@
-POST http://localhost:5000/api/wilders HTTP/1.1
+POST http://localhost:5000 HTTP/1.1
 content-type: application/json
 
 {
-    "name":"Ash20",
-    "city": "Londres"
+    "name":"Ashleigh",
+    "city": "London"
 } 

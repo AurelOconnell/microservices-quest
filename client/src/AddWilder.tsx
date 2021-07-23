@@ -10,7 +10,7 @@ function AddWilder(): JSX.Element {
     formSubmission,
     loading,
     delayed,
-    error,
+    errors,
   } = useCreateWilder();
 
   return (
@@ -31,7 +31,8 @@ function AddWilder(): JSX.Element {
         value={inputCity.value}
         onChange={inputCity.onChange}
       />
-      {error !== "" && <Error>{error}</Error>}
+      {errors.length > 0 &&
+        errors.map((error) => <Error key={error}>{error}</Error>)}
       <Button disabled={loading} showLoading={loading && !delayed}>
         {loading && !delayed ? <LoadingIcon /> : "Add"}
       </Button>

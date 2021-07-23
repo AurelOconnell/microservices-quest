@@ -8,11 +8,13 @@ import InputError from '../errors/InputError';
 import WilderModel, { IWilder } from '../models/Wilder';
 import BadRequestError from '../errors/BadRequestError';
 
-const stan = nats.connect('test-cluster', 'wilder');
-
 const router = Router();
 
-router.route('/api/wilders').post(
+const stan = nats.connect('wilder-vote', 'wilder', {
+  url: 'nats://nats-srv:4222',
+});
+
+router.route('/').post(
   [
     body('name').notEmpty().withMessage('name must be provided'),
     body('name')

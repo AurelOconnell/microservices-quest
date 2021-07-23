@@ -1,0 +1,35 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "3 - Tour of the Skill microservice",
+  "steps": [
+    {
+      "title": "Introduction",
+      "description": "Now that we have created a wilder, we are going to see how to create a skill.\n\nNote that the skill service is basically the same as the wilder service."
+    },
+    {
+      "file": "docker-compose.yml",
+      "description": "The skill service runs on port 5001",
+      "line": 21
+    },
+    {
+      "file": "docker-compose.yml",
+      "description": "It has its own mongo database ans as other services it is connected to the nats streaming server.",
+      "line": 26
+    },
+    {
+      "file": "skill/http/create.http",
+      "description": "There is nothing yet on the client to create a skill.\n\nUse this (send request) to create a skill",
+      "line": 6
+    },
+    {
+      "file": "skill/src/routes/skill.ts",
+      "description": "The new skill is saved in the `skill only` mongo db and an event is published.",
+      "line": 39
+    },
+    {
+      "file": "query/src/index.ts",
+      "description": "The query service is listening to the `SKILL_CREATED` event and will save the skill in the postgres database.\n\nGo to `http://localhost:5003/graphql` and run the following query\n```graphql\n{\n  skills {\n    id\n    title\n  }\n}\n```\n\nReload the client to see the new skill in the select a skill menu.\n\nNow we can vote on a skill, let's see about the vote service.",
+      "line": 62
+    }
+  ]
+}
