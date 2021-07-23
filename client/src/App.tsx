@@ -73,18 +73,28 @@ function App(): JSX.Element {
           const { wilders } = prev;
           return {
             ...prev,
-            wilders: wilders.map((wilder: Wilder) =>
-              wilder.id === wilderId
-                ? wilder.votes.map((vote) =>
-                    vote.skill.id === skillId
-                      ? {
-                          ...vote,
-                          count,
-                        }
-                      : vote
-                  )
-                : wilder
-            ),
+            wilders: wilders.map((wilder: Wilder) => {
+              if (wilder.id === wilderId) {
+                if (wilder.votes.find((vote) => vote.skill.id === skillId)) {
+                  return {
+                    ...wilder,
+                    votes: wilder.votes.map((vote) =>
+                      vote.skill.id === skillId
+                        ? {
+                            ...vote,
+                            count,
+                          }
+                        : vote
+                    ),
+                  };
+                }
+                return {
+                  ...wilder,
+                  votes: [...wilder.votes, { wilderId, skillId, count }],
+                };
+              }
+              return wilder;
+            }),
           };
         },
       });
