@@ -33,12 +33,12 @@
     },
     {
       "file": "query/src/index.ts",
-      "description": "The message data is the JSON string containing the new wilder data.\n\nWe records the data with a wilderRepository create method (TypeORM) to write into the postgres database.\n\n**Now the query microservice owns a copy of the new wilder in its database.**\n\nThe wilder is both stored in the wilder service and the query service.",
+      "description": "The message data is the JSON string containing the new wilder data.\n\nWe record the data with a wilderRepository create method (TypeORM) to write into the postgres database.\n\n**Now the query microservice owns a copy of the new wilder in its database.**\n\nThe wilder is both stored in the wilder service and the query service.",
       "line": 41
     },
     {
       "file": "query/src/index.ts",
-      "description": "Reach the graphQL server at `http://localhost:5003/graphql` and try the following query:\n\n```graphql\n{\n  wilders {\n    id\n    name\n    city\n  }\n}\n```\n\nWhen reloading the application you must see the new wilder appears.",
+      "description": "Reach the graphQL server at `http://localhost:5003/graphql` and try the following query:\n\n```graphql\n{\n  wilders {\n    id\n    name\n    city\n  }\n}\n```\n\nWhen reloading the application you must see the new wilder appear.",
       "line": 73
     }
   ]
