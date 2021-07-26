@@ -44,10 +44,6 @@ services:
       - wilder-mongo-srv
   nats-srv:
     image: nats-streaming
-    expose:
-      - 4222
-    ports:
-      - 8222:8222
     command:
       - "--cluster_id"
       - wilder-vote
