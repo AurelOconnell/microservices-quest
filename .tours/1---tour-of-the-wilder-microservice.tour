@@ -4,7 +4,7 @@
   "steps": [
     {
       "title": "Introduction",
-      "description": "The Wilder microservice is responsible for the creation of a wilder.\n\nFollow the step to understand how this is working."
+      "description": "The Wilder microservice is responsible for the creation of a wilder.\n\nFollow the steps to understand how this is working."
     },
     {
       "file": "docker-compose.yml",
@@ -23,7 +23,7 @@
     },
     {
       "file": "docker-compose.yml",
-      "description": "client is the frontend react application that will be accessible on http://localhost:3000/\n\nOpen it in your browser and open the network inspector.\n\nCreate a wilder(plus button).\n\nNote the url called by the client.",
+      "description": "client is the frontend react application that will be accessible on http://localhost:3000/\n\nOpen it in your browser and open the network inspector.\n\nCreate a wilder (plus button).\n\nNote the url called by the client.",
       "line": 2
     },
     {
@@ -33,12 +33,12 @@
     },
     {
       "file": "wilder/src/index.ts",
-      "description": "This the index file for the service `wilder`\n\nThe start function will start the server.",
+      "description": "This is the index file for the service `wilder`\n\nThe start function will start the server.",
       "line": 5
     },
     {
       "file": "wilder/src/index.ts",
-      "description": "The service is connected to its own database. \n\nThe url is composed with the service name `wilder-mongo-srv` specified in `docker-compose.yml`\n",
+      "description": "The service is connected to its own database. \n\nThe url contains the service name `wilder-mongo-srv` specified in `docker-compose.yml`\n",
       "line": 8,
       "selection": {
         "start": {

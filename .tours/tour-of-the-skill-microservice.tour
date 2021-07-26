@@ -13,7 +13,7 @@
     },
     {
       "file": "docker-compose.yml",
-      "description": "It has its own mongo database ans as other services it is connected to the nats streaming server.",
+      "description": "It has its own mongo database and as other services, it is connected to the nats streaming server.",
       "line": 26
     },
     {

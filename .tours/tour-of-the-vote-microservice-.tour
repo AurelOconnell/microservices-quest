@@ -18,7 +18,7 @@
     },
     {
       "file": "vote/src/routes/createVote.ts",
-      "description": "The body of the POST request is the wilder id and the skill id.\n\nThat's represent who received the vote and for wich skill.",
+      "description": "The body of the POST request is the wilder id and the skill id.\n\nThat represents who received the vote and for wich skill.",
       "line": 22
     },
     {
@@ -28,7 +28,7 @@
     },
     {
       "file": "vote/src/routes/createVote.ts",
-      "description": "It pusblishes a `VOTE_CREATED` event with a JSON string containing wilderId, skillId and the count.",
+      "description": "It publishes a `VOTE_CREATED` event with a JSON string containing: wilderId, skillId and the count.",
       "line": 30
     },
     {
